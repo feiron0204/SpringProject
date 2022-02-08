@@ -14,10 +14,12 @@ import member.dao.MemberDAO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private HttpSession httpSession;
 
 	@Override
-	public String login(Map<String,String> map, HttpSession httpSession) {
-		MemberDTO memberDTO=(MemberDTO) memberDAO.login(map);
+	public String login(Map<String,String> map) {
+		MemberDTO memberDTO=memberDAO.login(map);
 		if(memberDTO!=null) {
 			httpSession.setAttribute("memName", memberDTO.getName());
 			httpSession.setAttribute("memId", memberDTO.getId());
@@ -27,6 +29,41 @@ public class MemberServiceImpl implements MemberService {
 			return "fail";
 		}
 		
+	}
+
+	@Override
+	public void logout() {
+		httpSession.invalidate();
+	}
+
+	@Override
+	public String checkId(String id) {
+		MemberDTO memberDTO=memberDAO.checkId(id);
+		if(memberDTO!=null)
+			return "exist";
+		else 
+			return "non_exist";
+	}
+
+	@Override
+	public void write(MemberDTO memberDTO) {
+		memberDAO.write(memberDTO);
+	}
+
+	@Override
+	public MemberDTO modifyForm() {
+		return memberDAO.modifyForm((String)httpSession.getAttribute("memId"));
+	}
+
+	@Override
+	public void modify(MemberDTO memberDTO) {
+		memberDAO.modify(memberDTO);
+	}
+
+	@Override
+	public void delete(String id) {
+		memberDAO.delete(id);
+		httpSession.invalidate();
 	}
 
 

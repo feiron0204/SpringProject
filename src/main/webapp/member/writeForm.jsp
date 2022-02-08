@@ -135,11 +135,12 @@ $('#writeBtn').click(function(){
 	else if($('#writeForm #id').val() != $('#check').val()) $('#writeForm #idDiv').text('중복체크 하세요');
 	else $.ajax({
 		type:'post',
-		url:'/miniProject/member/write.do',
+		url:'/SpringProject/member/write',
 		data:$('#writeForm').serialize(),//'name='+$('#name').val()+'.....이런식으로감
 		//dataType:딱히 받을꺼없어서 빼버렸음
 		success:function(data){
 			alert('회원가입을 축하합니다');
+			location.href='/SpringProject/index.jsp'
 		},
 		error: function(err){
 			alert(err);
@@ -174,11 +175,11 @@ $('#writeForm #id').focusout(function(){
 		//window.open("/miniProject/member/checkId.do?id="+sId,"checkId","width=450 height=150 left=900 top=300");
 		$.ajax({
 			type:'post',
-			url:'/miniProject/member/checkId.do',
+			url:'/SpringProject/member/checkId',
 			data: 'id='+sId,
 			dataType:'text',
 			success:function(data){
-				data=data.trim();
+				//data=data.trim();
 				if(data=='exist'){
 					$('#writeForm #idDiv').text('사용 불가능');
 					$('#writeForm #idDiv').css('color', 'yellow');

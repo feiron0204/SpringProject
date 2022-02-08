@@ -62,7 +62,7 @@ body {
 <div id="header">
 	<h1>
 		<img alt="가지" src="/SpringProject/image/gargee.jpg" width="70" height="70" 
-		onclick="location.href='/SpringPorject/index.jsp'" style="cursor: pointer;"> MVC기반의 미니 프로젝트
+		onclick="location.href='/SpringProject/index.jsp'" style="cursor: pointer;"> MVC기반의 미니 프로젝트
 	</h1>
 	<br>
 	<jsp:include page="/main/menu.jsp"/>

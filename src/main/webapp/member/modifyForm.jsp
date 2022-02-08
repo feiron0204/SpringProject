@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<form name="modifyForm" id="modifyForm" method="post" action="/miniProject/member/modify.do">
+<form name="modifyForm" id="modifyForm">
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>
 			<td width="100" align="center">이름</td>
@@ -117,7 +117,7 @@ window.onload=function(){
 }
 
 //회원정보수정
-$('#modifyBtn').click(function(){
+$('#modifyForm #modifyBtn').click(function(){
 	$('#nameDiv').empty();
 	$('#pwdDiv').empty();
 	$('#repwdDiv').empty();
@@ -125,7 +125,21 @@ $('#modifyBtn').click(function(){
 	if($('#name').val() == '') $('#nameDiv').text('이름 입력');
 	else if($('#pwd').val() == '') $('#pwdDiv').text('비밀번호 입력');
 	else if($('#pwd').val() != $('#repwd').val()) $('#repwdDiv').text('비밀번호가 맞지 않습니다.');
-	else document.modifyForm.submit();
+	else $.ajax({
+		type:'post',
+		url:'/SpringProject/member/modify',
+		data:$('#modifyForm').serialize(),//'name='+$('#name').val()+'.....이런식으로감
+		//dataType:딱히 받을꺼없어서 빼버렸음
+		success:function(data){
+			alert('회원수정이 완료되었습니다');
+			location.href='/SpringProject/index.jsp'
+		},
+		error: function(err){
+			alert(err);
+			console.log(err);
+		}
+	});
+	
 });
 
 function checkPost() {

@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>와 회원가입실!!!!!패</h3>
+<script type="text/javascript">
+window.onload=function(){
+	alert("로그인후에 이용하실수 있습니다!");
+	location.href='/miniProject';
+}
+</script>
 </body>
+
 </html>
