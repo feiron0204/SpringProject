@@ -55,7 +55,7 @@
 				},
 				success:function(){
 					alert('글쓰기 성공');
-					location.href='/SpringProject/board/boardList?pg=1';
+					location.href='/SpringProject/board/boardList';
 				},
 				error:function(err){
 					alert("라이트폼에러");

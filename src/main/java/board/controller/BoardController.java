@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import board.bean.BoardDTO;
 import board.service.BoardService;
+import lombok.Builder.Default;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -34,15 +35,15 @@ public class BoardController {
 	}
 	
 	@GetMapping(value = "boardList")
-	public String boardList(Model model) {
+	public String boardList(@RequestParam(required=false, defaultValue = "1")String pg, Model model) {
 		model.addAttribute("display", "/board/boardList.jsp");
-		model.addAttribute("pg", "1");
+		model.addAttribute("pg", pg);
 		return "/index";
 	}
 	
 	@PostMapping(value = "getBoardList")
 	@ResponseBody
-	public Map<String,Object> getBoardList(@RequestParam String pg){
+	public Map<String,Object> getBoardList(@RequestParam(required=false, defaultValue = "1") String pg){
 		return boardService.getBoardList(pg);
 	}
 }

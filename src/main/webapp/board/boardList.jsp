@@ -59,7 +59,7 @@ margin-top: 10px;
 	color:red;
 }
 </style>   
-<input type="hidden" name="pg" id="pg" value="${param.pg}">    
+<input type="hidden" name="pg" id="pg" value="${pg}">    
 <table border="1" cellspacing="0" cellpadding="5" id="boardListTable" frame="hsides" rules="rows">
 	<tr>
 		<th width="100">글번호</th>

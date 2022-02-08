@@ -33,7 +33,7 @@
 		<li><a href="/SpringProject/imageboard/imageboardWriteForm.do">이미지등록</a></li>
 		<li><a href="/SpringProject/guestbook/guestbookWriteForm.do">방명록작성</a></li>
 	</c:if>
-	<li><a href="/SpringProject/board/boardList?pg=1">목록</a></li><!-- 변수로 page를 못씀 키워드라서 -->
+	<li><a href="/SpringProject/board/boardList">목록</a></li><!-- 변수로 page를 못씀 키워드라서 -->
 	<li><a href="/SpringProject/imageboard/imageboardList.do?pg=1">이미지목록</a></li>
 	<li><a href="/SpringProject/guestbook/guestbookList.do?pg=1">방명록보기</a></li>
 </ul>
