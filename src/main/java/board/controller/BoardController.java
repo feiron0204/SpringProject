@@ -46,4 +46,18 @@ public class BoardController {
 	public Map<String,Object> getBoardList(@RequestParam(required=false, defaultValue = "1") String pg){
 		return boardService.getBoardList(pg);
 	}
+	
+	@GetMapping(value = "boardView")
+	public String boardView(@RequestParam Map<String,String> map,Model model) {
+		model.addAttribute("display","/board/boardView.jsp");
+		model.addAttribute("pg", map.get("pg"));
+		model.addAttribute("seq", map.get("seq"));
+		return "/index";
+	}
+	
+	@PostMapping(value = "getBoardView")
+	@ResponseBody
+	public Map<String,Object> getBoardView(@RequestParam String seq) {
+		return boardService.getBoardView(seq);
+	}
 }

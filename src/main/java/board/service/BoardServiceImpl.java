@@ -50,5 +50,12 @@ public class BoardServiceImpl implements BoardService {
 		temp.put("boardPaging", boardPaging.getPagingHTML().toString());
 		return temp;
 	}
+	@Override
+	public Map<String,Object> getBoardView(String seq) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memId", httpSession.getAttribute("memId"));
+		map.put("memberDTO", boardDAO.getBoardView(seq));
+		return map;
+	}
 
 }

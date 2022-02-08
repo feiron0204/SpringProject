@@ -55,7 +55,7 @@
  				#{endNum}
  	</select>
  	
- 	<select id="getBoardView" parameterType="int" resultType="board">
+ 	<select id="getBoardView" parameterType="String" resultType="board">
  		select * from board where seq=#{seq}
  	</select>
  	

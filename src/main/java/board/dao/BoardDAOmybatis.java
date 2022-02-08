@@ -25,5 +25,9 @@ public class BoardDAOmybatis implements BoardDAO {
 	public int getTotalA() {
 		return sqlSession.selectOne("boardSQL.getTotalA");
 	}
+	@Override
+	public BoardDTO getBoardView(String seq) {
+		return sqlSession.selectOne("boardSQL.getBoardView", seq);
+	}
 
 }

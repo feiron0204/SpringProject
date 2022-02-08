@@ -67,7 +67,7 @@
 		</td>
 	</tr>
 </table>
-<input type="button" value="목록" onclick="location.href='/miniProject/board/boardList.do?pg=${pg}'">
+<input type="button" value="목록" onclick="location.href='/SpringProject/board/boardList?pg=${pg}'">
 <span id ="boardViewSpan">
 <input type="button" value="글수정" onclick="mode(1)"><!-- 글번호, 페이지번호를 가져가야함(seq,pg) -->
 <input type="button" value="글삭제" onclick="mode(2)"><!-- 글번호 페이지는1로돌리면됨    (seq)-->
@@ -79,22 +79,21 @@
 $(function(){
 	$.ajax({
 		type:'post',
-		url:'/miniProject/board/getBoardView.do',
+		url:'/SpringProject/board/getBoardView',
 		data:'seq='+$('#seq').val(),
 		dataType:'json',
 		success:function(data){
-			console.log(data);
 				/* $('#subjectSpan').text(data.boardDTO.subject);
 				$('#seqSpan').text(data.boardDTO.seq);
 				$('#idSpan').text(data.boardDTO.id);
 				$('#hitSpan').text(data.boardDTO.hit);
 				$('#contentSpan').text(data.boardDTO.content); */
-			$('#subjectSpan').text(data.subject);
-			$('#seqSpan').text(data.seq);
-			$('#idSpan').text(data.id);
-			$('#hitSpan').text(data.hit);
-			$('#contentSpan').text(data.content);
-			if(data.memId==data.id){
+			$('#subjectSpan').text(data.memberDTO.subject);
+			$('#seqSpan').text(data.memberDTO.seq);
+			$('#idSpan').text(data.memberDTO.id);
+			$('#hitSpan').text(data.memberDTO.hit);
+			$('#contentSpan').text(data.memberDTO.content);
+			if(data.memId==data.memberDTO.id){
 				$('#boardViewSpan').show();
 			}else{
 				$('#boardViewSpan').hide();
@@ -111,15 +110,15 @@ $(function(){
 function mode(num){
 	if(num==1){//글수정
 		document.getElementById("boardViewForm").method='post';
-		document.getElementById("boardViewForm").action='/miniProject/board/boardModifyForm.do';
+		document.getElementById("boardViewForm").action='/SpringProject/board/boardModifyForm';
 		document.getElementById("boardViewForm").submit();
 	}else if(num==2){//글삭제
 		document.getElementById("boardViewForm").method='post';
-		document.getElementById("boardViewForm").action='/miniProject/board/boardDelete.do';
+		document.getElementById("boardViewForm").action='/SpringProject/board/boardDelete';
 		document.getElementById("boardViewForm").submit();
 	}else if(num==3){
 		document.getElementById("boardViewForm").method='post';
-		document.getElementById("boardViewForm").action='/miniProject/board/boardReplyForm.do';
+		document.getElementById("boardViewForm").action='/SpringProject/board/boardReplyForm';
 		document.getElementById("boardViewForm").submit();
 	}
 }

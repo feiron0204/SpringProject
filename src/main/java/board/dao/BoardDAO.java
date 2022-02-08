@@ -13,4 +13,6 @@ public interface BoardDAO {
 
 	public int getTotalA();
 
+	public BoardDTO getBoardView(String seq);
+
 }

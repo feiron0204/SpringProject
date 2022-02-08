@@ -5,7 +5,6 @@ $(function(){
 		data:'pg='+$('#pg').val(),
 		dataType:'json',
 		success:function(data){
-			console.log(data);
 			$.each(data.list,function(index,items){
 				$('<tr/>')
 				.append($('<td/>',{
@@ -72,7 +71,7 @@ $(function(){
 					if(data.memId==null){
 					    alert('먼저 로그인 하세요');
 					}else{
-						location.href='/SpringProject/board/boardView.do?seq='+$(this).parent().prev().text()+'&pg='+$('#pg').val();
+						location.href='/SpringProject/board/boardView?seq='+$(this).parent().prev().text()+'&pg='+$('#pg').val();
 					}
 				});//click
 				
