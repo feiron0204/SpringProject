@@ -23,6 +23,15 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 이거 이름같은 빈있으면 그거우선적으로가게하는거! -->
+	<beans:bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+      <beans:property name="order" value="0" />
+    </beans:bean>
+    
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<beans:property name="contentType" value="text/html;charset=UTF-8" />
+	</beans:bean>
+   
 	<context:component-scan base-package="com.spring.SpringProject" />
 	<context:component-scan base-package="member.controller" />
 	<context:component-scan base-package="board.controller" />

@@ -2,6 +2,8 @@ package board.service;
 
 import java.util.Map;
 
+import board.bean.BoardDTO;
+
 
 
 public interface BoardService {
@@ -11,5 +13,9 @@ public interface BoardService {
 	public Map<String,Object> getBoardList(String pg);
 
 	public Map<String,Object> getBoardView(String seq);
+
+	public BoardDTO boardModifyForm(String seq);
+
+	public void boardModify(BoardDTO boardDTO);
 
 }

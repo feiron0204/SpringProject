@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import board.bean.BoardDTO;
 import board.bean.BoardPaging;
 import board.dao.BoardDAO;
 
@@ -36,7 +37,6 @@ public class BoardServiceImpl implements BoardService {
 		//페이징
 		int totalA=boardDAO.getTotalA();//총글수
 		
-		BoardPaging boardPaging = new BoardPaging();
 		boardPaging.setCurrentPage(Integer.parseInt(pg));
 		boardPaging.setPageBlock(3);
 		boardPaging.setPageSize(5);
@@ -54,8 +54,16 @@ public class BoardServiceImpl implements BoardService {
 	public Map<String,Object> getBoardView(String seq) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("memId", httpSession.getAttribute("memId"));
-		map.put("memberDTO", boardDAO.getBoardView(seq));
+		map.put("boardDTO", boardDAO.getBoardView(seq));
 		return map;
+	}
+	@Override
+	public BoardDTO boardModifyForm(String seq) {
+		return boardDAO.boardModifyForm(seq);
+	}
+	@Override
+	public void boardModify(BoardDTO boardDTO) {
+		boardDAO.boardModify(boardDTO);
 	}
 
 }

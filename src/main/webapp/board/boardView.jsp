@@ -83,17 +83,12 @@ $(function(){
 		data:'seq='+$('#seq').val(),
 		dataType:'json',
 		success:function(data){
-				/* $('#subjectSpan').text(data.boardDTO.subject);
-				$('#seqSpan').text(data.boardDTO.seq);
-				$('#idSpan').text(data.boardDTO.id);
-				$('#hitSpan').text(data.boardDTO.hit);
-				$('#contentSpan').text(data.boardDTO.content); */
-			$('#subjectSpan').text(data.memberDTO.subject);
-			$('#seqSpan').text(data.memberDTO.seq);
-			$('#idSpan').text(data.memberDTO.id);
-			$('#hitSpan').text(data.memberDTO.hit);
-			$('#contentSpan').text(data.memberDTO.content);
-			if(data.memId==data.memberDTO.id){
+			$('#subjectSpan').text(data.boardDTO.subject);
+			$('#seqSpan').text(data.boardDTO.seq);
+			$('#idSpan').text(data.boardDTO.id);
+			$('#hitSpan').text(data.boardDTO.hit);
+			$('#contentSpan').text(data.boardDTO.content);
+			if(data.memId==data.boardDTO.id){
 				$('#boardViewSpan').show();
 			}else{
 				$('#boardViewSpan').hide();

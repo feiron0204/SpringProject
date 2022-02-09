@@ -52,21 +52,15 @@
 		else
 			$.ajax({
 				type:'post',
-				url:'/miniProject/board/boardModify.do',
-				dataType: "text",
+				url:'/SpringProject/board/boardModify',
 				data:{
 					'seq':$("#seq").val(),
 					'subject':$("#subject").val(),
 					'content':$('#content').val()
 				},
-				success:function(data){
-					if(data.trim()=='1'){
+				success:function(){
 					alert('수정 성공');
-					}else{
-						alert('수정 실패');
-					}
-						
-					location.href="/miniProject/board/boardList.do?pg="+${pg};
+					location.href="/SpringProject/board/boardList?pg="+${pg};
 				},
 				error:function(err){
 					alert(err);

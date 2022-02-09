@@ -1,12 +1,13 @@
 package board.controller;
 
-import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import board.bean.BoardDTO;
 import board.service.BoardService;
-import lombok.Builder.Default;
 
 @Controller
 @RequestMapping(value = "/board")
@@ -54,10 +54,23 @@ public class BoardController {
 		model.addAttribute("seq", map.get("seq"));
 		return "/index";
 	}
-	
 	@PostMapping(value = "getBoardView")
 	@ResponseBody
 	public Map<String,Object> getBoardView(@RequestParam String seq) {
 		return boardService.getBoardView(seq);
+	}
+	
+	@PostMapping(value = "boardModifyForm")
+	public String boardModifyForm(@RequestParam Map<String, String> map,Model model) {
+		model.addAttribute("display", "/board/boardModifyForm.jsp");
+		model.addAttribute("boardDTO", boardService.boardModifyForm(map.get("seq")));
+		model.addAttribute("pg", map.get("pg"));
+		return "/index";
+	}
+	
+	@PostMapping(value = "boardModify")
+	@ResponseBody
+	public void boardModify(@ModelAttribute BoardDTO boardDTO) {
+		boardService.boardModify(boardDTO);
 	}
 }

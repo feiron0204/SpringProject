@@ -29,5 +29,13 @@ public class BoardDAOmybatis implements BoardDAO {
 	public BoardDTO getBoardView(String seq) {
 		return sqlSession.selectOne("boardSQL.getBoardView", seq);
 	}
+	@Override
+	public BoardDTO boardModifyForm(String seq) {
+		return sqlSession.selectOne("boardSQL.boardModifyForm",seq);
+	}
+	@Override
+	public void boardModify(BoardDTO boardDTO) {
+		sqlSession.update("boardSQL.boardModify", boardDTO);
+	}
 
 }

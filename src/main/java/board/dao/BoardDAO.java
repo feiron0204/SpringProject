@@ -15,4 +15,8 @@ public interface BoardDAO {
 
 	public BoardDTO getBoardView(String seq);
 
+	public BoardDTO boardModifyForm(String seq);
+
+	public void boardModify(BoardDTO boardDTO);
+
 }

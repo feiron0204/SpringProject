@@ -20,8 +20,8 @@
  						, ref) 
  					values(seq_board.nextval
  						, #{id}
- 						, #{email}
  						, #{name}
+ 						, #{email}
  						, #{subject}
  						, #{content}
  						, seq_board.currval)
@@ -61,6 +61,10 @@
  	
  	<select id="getTotalA" resultType="int">
  		select count(*) from board
+ 	</select>
+ 	
+ 	<select id="boardModifyForm" parameterType="String" resultType="board">
+ 		select * from board where seq=#{seq}
  	</select>
  	
  	<update id="boardModify" parameterType="board">

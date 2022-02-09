@@ -11,9 +11,8 @@ $(function(){
 					align: 'center',
 					text:items.seq
 				}))
-				.append($('<td/>',{
-					align: 'center',
-				}).append($('<a/>',{
+				.append($('<td/>')
+				.append($('<a/>',{
 					href:'#',
 					text:items.subject,
 					class:'subjectA  subjectA_'+items.seq
