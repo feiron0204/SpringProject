@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import board.bean.BoardDTO;
 import board.service.BoardService;
@@ -75,9 +76,22 @@ public class BoardController {
 	}
 	
 	@PostMapping(value = "boardDelete")
-	public String boardDelete(@RequestParam String seq,Model model) {
+	public ModelAndView boardDelete(@RequestParam String seq) {
 		boardService.boardDelete(seq);
-		model.addAttribute("display", "/board/boardList.jsp");
+		return new ModelAndView("redirect:/board/boardList");
+	}
+	
+	@PostMapping(value = "boardReplyForm")
+	public String boardReplyForm(@RequestParam String seq,@RequestParam String pg, Model model) {
+		model.addAttribute("pseq", seq);
+		model.addAttribute("pg", pg);
+		model.addAttribute("display", "/board/boardReplyForm.jsp");
 		return "/index";
+	}
+	
+	@PostMapping(value = "boardReply")
+	@ResponseBody
+	public void boardReply(@RequestParam Map<String, String> map) {
+		boardService.boardReply(map);
 	}
 }

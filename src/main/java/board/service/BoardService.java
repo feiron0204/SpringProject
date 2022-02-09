@@ -20,4 +20,6 @@ public interface BoardService {
 
 	public void boardDelete(String seq);
 
+	public void boardReply(Map<String, String> map);
+
 }

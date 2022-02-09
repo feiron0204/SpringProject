@@ -67,6 +67,23 @@ public class BoardServiceImpl implements BoardService {
 	}
 	@Override
 	public void boardDelete(String seq) {
-		boardDAO.boardDelete(boardDAO.getBoardView(seq));
+		boardDAO.boardDelete(seq);
+	}
+	@Override
+	public void boardReply(Map<String, String> map) {
+		BoardDTO boardDTO=(BoardDTO) this.getBoardView(map.get("pseq")).get("boardDTO");
+		
+		String id = (String) httpSession.getAttribute("memId");
+		String name = (String) httpSession.getAttribute("memName");
+		String email = (String) httpSession.getAttribute("memEmail");
+		
+		map.put("id", id);
+		map.put("name", name);
+		map.put("email", email);
+		map.put("ref", boardDTO.getRef()+"");
+		map.put("lev", boardDTO.getLev()+"");
+		map.put("step", boardDTO.getStep()+"");
+		
+		boardDAO.boardReply(map);
 	}
 }

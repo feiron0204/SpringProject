@@ -53,7 +53,7 @@
 		else
 			$.ajax({
 				type:'post',
-				url:'/miniProject/board/boardReply.do',
+				url:'/SpringProject/board/boardReply',
 				data:{
 					'subject':$("#subject").val(),
 					'content':$('#content').val(),
@@ -61,7 +61,7 @@
 				},
 				success:function(){
 					alert('답글쓰기 성공');
-					location.href='/miniProject/board/boardList.do?pg='+$('#pg').val();
+					location.href='/SpringProject/board/boardList?pg='+$('#pg').val();
 				},
 				error:function(err){
 					alert(err);
