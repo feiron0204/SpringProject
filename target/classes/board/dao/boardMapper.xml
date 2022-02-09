@@ -162,4 +162,36 @@
  	<update id="boardHit" parameterType="int">
  		update board set hit=hit+1 where seq=#{seq}
  	</update>
+ 	
+ 	<select id="getSearchTotalA" parameterType="java.util.Map" resultType="int">
+ 		select count(*) from board where ${searchOption} like '%'||#{keyword}||'%'
+ 	</select>
+ 	
+ 	<select id="getBoardSearchList" parameterType="java.util.Map" resultType="board">
+ 		select * from (select rownum rn,tt.* from 
+ 				(select seq
+ 						,id
+ 						,name
+ 						,email
+ 						,subject
+ 						,content
+ 						,ref
+ 						,lev
+ 						,step
+ 						,pseq
+ 						,reply
+ 						,hit
+ 						,to_char(logtime,'yyyy.mm.dd') 
+ 						as logtime from board where ${searchOption} like '%'||#{keyword}||'%' order by ref desc, step asc) tt) 
+ 				where 
+ 				<!-- between #{startNum} and #{endNum}  이것도가능 -->
+ 				rn 
+ 				<!-- <![CDATA[>=]]> 이것도가능 -->
+ 				&gt;=
+ 				#{startNum}
+ 				and rn 
+ 				<!-- <![CDATA[<=]]> 이것도가능 -->
+ 				&lt;=
+ 				#{endNum}
+ 	</select>
  </mapper>

@@ -105,4 +105,31 @@ public class BoardServiceImpl implements BoardService {
 		
 		boardDAO.boardReply(map);
 	}
+	@Override
+	public Map<String, Object> getBoardSearchList(Map<String, String> map,String pg) {
+		map.put("endNum", Integer.parseInt(pg)*5+"");
+		map.put("startNum", Integer.parseInt(pg)*5-4+"");
+		//페이징
+		int totalA=boardDAO.getSearchTotalA(map);//총글수
+		
+		boardPaging.setCurrentPage(Integer.parseInt(pg));
+		boardPaging.setPageBlock(3);
+		boardPaging.setPageSize(5);
+		boardPaging.setTotalA(totalA);
+		
+		boardPaging.makePagingHTML();
+		
+		if(httpSession.getAttribute("memId")!=null) {
+			Cookie cookie = new Cookie("memHit", "0");
+			cookie.setMaxAge(30*60);
+			resp.addCookie(cookie);
+		}
+		
+		Map<String,Object> temp=new HashMap<String, Object>();
+		temp.put("list", boardDAO.getBoardSearchList(map));
+		temp.put("memId", httpSession.getAttribute("memId"));
+		temp.put("boardPaging", boardPaging.getPagingHTML().toString());
+		
+		return temp;
+	}
 }

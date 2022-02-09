@@ -98,4 +98,10 @@ public class BoardController {
 	public void boardReply(@RequestParam Map<String, String> map) {
 		boardService.boardReply(map);
 	}
+	
+	@PostMapping(value = "getBoardSearchList")
+	@ResponseBody
+	public Map<String,Object> getBoardSearchList(@RequestParam Map<String,String> map,@RequestParam(required=false, defaultValue = "1") String pg){
+		return boardService.getBoardSearchList(map,pg);
+	}
 }

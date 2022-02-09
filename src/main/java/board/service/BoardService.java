@@ -24,4 +24,6 @@ public interface BoardService {
 
 	public void boardReply(Map<String, String> map);
 
+	public Map<String, Object> getBoardSearchList(Map<String, String> map,String pg);
+
 }

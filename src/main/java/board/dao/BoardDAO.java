@@ -25,4 +25,8 @@ public interface BoardDAO {
 
 	public void boardHit(String seq);
 
+	public int getSearchTotalA(Map<String, String> map);
+
+	public List<BoardDTO> getBoardSearchList(Map<String, String> map);
+
 }

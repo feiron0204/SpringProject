@@ -49,4 +49,12 @@ public class BoardDAOmybatis implements BoardDAO {
 	public void boardHit(String seq) {
 		sqlSession.update("boardSQL.boardHit", Integer.parseInt(seq));
 	}
+	@Override
+	public List<BoardDTO> getBoardSearchList(Map<String, String> map) {
+		return sqlSession.selectList("boardSQL.getBoardSearchList", map);
+	}
+	@Override
+	public int getSearchTotalA(Map<String,String> map) {
+		return sqlSession.selectOne("boardSQL.getSearchTotalA",map);
+	}
 }

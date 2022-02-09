@@ -1,10 +1,12 @@
 $(function(){
+
 	$.ajax({
 		type:'post',
 		url:'/SpringProject/board/getBoardList',
 		data:'pg='+$('#pg').val(),
 		dataType:'json',
 		success:function(data){
+			$('#search').val('off');
 			$.each(data.list,function(index,items){
 				$('<tr/>')
 				.append($('<td/>',{
@@ -82,3 +84,5 @@ $(function(){
 		}
 	});
 });
+
+
