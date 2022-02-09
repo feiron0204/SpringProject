@@ -2,6 +2,8 @@ package board.service;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+
 import board.bean.BoardDTO;
 
 
@@ -12,7 +14,7 @@ public interface BoardService {
 
 	public Map<String,Object> getBoardList(String pg);
 
-	public Map<String,Object> getBoardView(String seq);
+	public Map<String,Object> getBoardView(String seq, Cookie cookie);
 
 	public BoardDTO boardModifyForm(String seq);
 

@@ -158,4 +158,8 @@
 			update board set reply=reply-1 where seq=#{pseq};
 		end;
  	</insert>
+ 	
+ 	<update id="boardHit" parameterType="int">
+ 		update board set hit=hit+1 where seq=#{seq}
+ 	</update>
  </mapper>

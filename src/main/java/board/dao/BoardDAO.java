@@ -23,4 +23,6 @@ public interface BoardDAO {
 
 	public void boardReply(Map<String, String> map);
 
+	public void boardHit(String seq);
+
 }

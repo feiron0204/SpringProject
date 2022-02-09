@@ -3,9 +3,12 @@ package board.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,8 +60,9 @@ public class BoardController {
 	}
 	@PostMapping(value = "getBoardView")
 	@ResponseBody
-	public Map<String,Object> getBoardView(@RequestParam String seq) {
-		return boardService.getBoardView(seq);
+	public Map<String,Object> getBoardView(@RequestParam String seq,@CookieValue(name = "memHit", required = false) Cookie cookie) {
+		System.out.println(cookie);
+		return boardService.getBoardView(seq,cookie);
 	}
 	
 	@PostMapping(value = "boardModifyForm")
