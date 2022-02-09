@@ -18,4 +18,6 @@ public interface BoardService {
 
 	public void boardModify(BoardDTO boardDTO);
 
+	public void boardDelete(String seq);
+
 }

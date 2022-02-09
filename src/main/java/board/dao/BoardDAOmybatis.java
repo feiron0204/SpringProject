@@ -37,5 +37,9 @@ public class BoardDAOmybatis implements BoardDAO {
 	public void boardModify(BoardDTO boardDTO) {
 		sqlSession.update("boardSQL.boardModify", boardDTO);
 	}
-
+	@Override
+	public void boardDelete(BoardDTO boardDTO) {
+		sqlSession.update("boardSQL.boardDelete1", boardDTO.getPseq());
+		sqlSession.delete("boardSQL.boardDelete2", boardDTO.getSeq());
+	}
 }

@@ -128,7 +128,7 @@
  	<update id="boardDelete1" parameterType="int">
  		update board set reply=reply-1 where seq=#{pseq}
  	</update>
- 	<delete id="boardDelete2" parameterType="String">
+ 	<delete id="boardDelete2" parameterType="int">
  		delete from board where seq=#{seq}
  	</delete>
  </mapper>

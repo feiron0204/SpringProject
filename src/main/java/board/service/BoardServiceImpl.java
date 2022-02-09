@@ -65,5 +65,8 @@ public class BoardServiceImpl implements BoardService {
 	public void boardModify(BoardDTO boardDTO) {
 		boardDAO.boardModify(boardDTO);
 	}
-
+	@Override
+	public void boardDelete(String seq) {
+		boardDAO.boardDelete(boardDAO.getBoardView(seq));
+	}
 }

@@ -73,4 +73,11 @@ public class BoardController {
 	public void boardModify(@ModelAttribute BoardDTO boardDTO) {
 		boardService.boardModify(boardDTO);
 	}
+	
+	@PostMapping(value = "boardDelete")
+	public String boardDelete(@RequestParam String seq,Model model) {
+		boardService.boardDelete(seq);
+		model.addAttribute("display", "/board/boardList.jsp");
+		return "/index";
+	}
 }
