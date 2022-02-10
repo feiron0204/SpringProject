@@ -109,6 +109,7 @@ function boardPaging(pg2){
 	}else{
 		$('#searchPg').val(pg2);
 		$('#boardSearchBtn').trigger('click');
+		$('#searchPg').val('1');
 	}
 	*/
 	if($('#search').val()=='off'){	

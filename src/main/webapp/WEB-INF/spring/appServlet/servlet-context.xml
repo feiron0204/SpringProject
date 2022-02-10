@@ -18,6 +18,7 @@
 	<resources location="/image/" mapping="/image/**" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- 웹으로뿌리고싶어요~리졸버 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- <beans:property name="prefix" value="/WEB-INF/views/" /> -->
 		<beans:property name="suffix" value=".jsp" />
@@ -28,6 +29,13 @@
       <beans:property name="order" value="0" />
     </beans:bean>
     
+    <!-- 파일업로드를하고싶어요~리졸버 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	
+    </beans:bean>
+    
+    
+    <!-- 모델을 return할때 json으로 바꿔주기위한놈 -->
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<beans:property name="contentType" value="text/html;charset=UTF-8" />
 	</beans:bean>
