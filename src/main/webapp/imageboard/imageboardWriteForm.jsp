@@ -3,7 +3,7 @@
 
 <h3>이미지 등록</h3>
 <form id="imageboardWirteForm" method="post" enctype="multipart/form-data" 
-action="/miniProject/imageboard/imageboardWrite.do" >
+action="/SpringProject/imageboard/imageboardWrite" >
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>
 			<td width="100" align="center">상품코드</td>
@@ -42,10 +42,17 @@ action="/miniProject/imageboard/imageboardWrite.do" >
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" id="imageboardWriteBtn" value="이미지등록">
+				<input type="button" id="imageboardWriteBtn" value="이미지등록">
 				<input type="reset" value="다시작성">
 			</td>
 		</tr>
 	</table>
 </form>
-	
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$('#imageboardWriteBtn').click(function(){
+	//1. 단순 submit
+	$('#imageboardWriteForm').submit();
+	//2. ajax
+});
+</script>

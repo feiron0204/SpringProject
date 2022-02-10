@@ -13,6 +13,8 @@
 	<context:component-scan base-package="board.dao" />
 	<context:component-scan base-package="board.service" />
 	<context:component-scan base-package="board.bean" />
+	<context:component-scan base-package="imageboard.dao" />
+	<context:component-scan base-package="imageboard.service" />
 	<context:component-scan base-package="spring.conf" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
