@@ -132,4 +132,17 @@ public class BoardServiceImpl implements BoardService {
 		
 		return temp;
 	}
+	
+	/*
+	@Override
+	public List<BoardDTO> getBoardSearchList(Map<String, String> map){
+		int endNum = Integer.parseInt(map.get("pg"))*5;
+		int startNum = endNum-4;
+		
+		map.put("startNum",startNum+"");
+		map.put("endNum",endNum+"");
+		List<BoardDTO> list = boardDAO.getBoardSearchList(map);
+	}
+	
+	 */
 }

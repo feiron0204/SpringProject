@@ -104,4 +104,26 @@ public class BoardController {
 	public Map<String,Object> getBoardSearchList(@RequestParam Map<String,String> map,@RequestParam(required=false, defaultValue = "1") String pg){
 		return boardService.getBoardSearchList(map,pg);
 	}
+	
+	/*
+	 @PostMapping(value = "getBoardSearchList")
+	 @ResponseBody
+	 public ModelAndView getBoardSearchList(@RequestParam Map<String,String> map,
+	 										HttpSession session){
+	 	List<BoardDTO> list = boardService.getBoardSearchList(map);
+	 	
+	 	String memId = (String) session.getAttribute("memId");
+	 	
+	 	BoardPaging boardPaging = boardService.boardPaging(map);
+	 	
+	 	ModelAndView mav = new ModelAndView();
+	 	mav.addObject("memId",memId);
+	 	mav.addObject("list",list);
+	 	mav.addObject("boardPaging",boardPaging);
+	 	mav.setViewName("jsonView");
+	 	
+	 	return mav;
+	 }
+	 
+	 */
 }
