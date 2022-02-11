@@ -15,6 +15,10 @@
 	<context:component-scan base-package="board.bean" />
 	<context:component-scan base-package="imageboard.dao" />
 	<context:component-scan base-package="imageboard.service" />
+	<context:component-scan base-package="imageboard.bean" />
+	<context:component-scan base-package="guestbook.dao" />
+	<context:component-scan base-package="guestbook.service" />
+	<context:component-scan base-package="guestbook.bean" />
 	<context:component-scan base-package="spring.conf" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

@@ -16,6 +16,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources location="/js/" mapping="/js/**" />
 	<resources location="/image/" mapping="/image/**" />
+	<resources location="/storage/" mapping="/storage/**" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<!-- 웹으로뿌리고싶어요~리졸버 -->
@@ -31,7 +32,6 @@
     
     <!-- 파일업로드를하고싶어요~리졸버 -->
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    	
     </beans:bean>
     
     
@@ -44,6 +44,7 @@
 	<context:component-scan base-package="member.controller" />
 	<context:component-scan base-package="board.controller" />
 	<context:component-scan base-package="imageboard.controller" />
+	<context:component-scan base-package="guestbook.controller" />
 	
 	
 	

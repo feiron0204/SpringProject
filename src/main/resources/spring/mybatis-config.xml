@@ -8,5 +8,6 @@
 		<typeAlias type="member.bean.MemberDTO" alias="member" />
 		<typeAlias type="board.bean.BoardDTO" alias="board" />
 		<typeAlias type="imageboard.bean.ImageboardDTO" alias="imageboard"/>
+		<typeAlias type="guestbook.bean.GuestbookDTO" alias="guestbook"/>
 	</typeAliases>
 </configuration>

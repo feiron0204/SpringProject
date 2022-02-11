@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style type="text/css" >
 #imageboardListTable th{
 	font-size: 16px;
@@ -61,7 +59,7 @@ margin-top: 10px;
 }
 </style>   
 
-<form name="" method="post" action="/miniProject/imageboard/imageboardDelete.do">
+<form name="" method="post" action="/SpringProject/imageboard/imageboardDelete">
 <input type="hidden" name="pg" id="pg" value="${pg}">    
 <table border="1" cellspacing="0" cellpadding="5" id="imageboardListTable" frame="hsides" rules="rows">
 	<tr>
@@ -72,39 +70,18 @@ margin-top: 10px;
 		<th width="150">단가</th>
 		<th width="100">개수</th>
 		<th width="150">합계</th>
+		<fmt:formatNumber pattern=""></fmt:formatNumber>
 	</tr>
-	<c:if test="${list!=null}">
-		<c:forEach var="imageboardDTO" items="${list}">
-			<tr>
-				<td align="center">
-					<input type="checkbox" name="check" class="check" value="${imageboardDTO.seq }">${imageboardDTO.seq}
-				</td>
-				<td align="center">
-					<img src="/miniProject/storage/${imageboardDTO.image1}" width="70" height="70" alt="${imageboardDTO.imageName}">
-				</td>
-				<td align="center">
-					<a href="/miniProject/imageboard/imageboardView.do?pg=${pg}&seq=${imageboardDTO.seq}" class="imageNameA">${imageboardDTO.imageName}</a>
-				</td>
-				<td align="center">
-				<fmt:formatNumber pattern="#,###">${imageboardDTO.imagePrice}</fmt:formatNumber> 
-				</td>
-				<td align="center">${imageboardDTO.imageQty}</td>
-				<td align="center">
-				<fmt:formatNumber pattern="#,###">${imageboardDTO.imagePrice * imageboardDTO.imageQty}</fmt:formatNumber>
-				</td>
-			</tr>
-		</c:forEach>
-	</c:if>
 </table>
 <input type="submit" value="선택삭제" style="float: left; margin: 5px 10px">
-<div style="text-align:center; width: 750; font-size: 15pt">${imageboardPaging }</div>
+<div id="imageboardPagingDiv" style="text-align:center; width: 750; font-size: 15pt" ></div>
 </form>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- <script type="text/javascript" src="/miniProjectT/js/imageboardList.js"></script> -->
 <script type="text/javascript">
 function imageboardPaging(pg2){
-	location.href="/miniProject/imageboard/imageboardList.do?pg="+pg2;
+	location.href="/SpringProject/imageboard/imageboardList?pg="+pg2;
 }
 function checkAll(){
 	//alert("체크박스의 개수 = "+document.getElementsByName("check").length);
@@ -120,6 +97,37 @@ function checkAll(){
 			check[i].checked=false;
 		}
 	}
-	
 }
+$(function(){
+	$.ajax({
+		type:'post',
+		url:'/SpringProject/imageboard/getImageboardList',
+		data:'pg='+$('#pg').val(),
+		dataType:'json',
+		success:function(data){
+			$.each(data.list,function(index,items){
+				$('<tr/>')
+				.append($('<td/>', {align:'center'})
+						.append($('<input>',{type:'checkbox',name:'check',class:'check',value:items.seq,text:items.seq})))
+				.append($('<td/>', {align:'center'})
+						.append($('<img/>',{src:'/SpringProject/storage/'+items.image1,width:'70',height:'70',alt:items.imageName})))
+				.append($('<td/>', {align:'center'})
+						.append($('<a/>',{href:'/SpringProject/imageboard/imageboardView?pg='+$('#pg').val()+'&seq='+items.seq,class:'imageNameA',text:items.imageName})))
+				.append($('<td/>', {align:'center',class:'number',text:items.imagePrice}))
+				.append($('<td/>', {align:'center',class:'number',text:items.imageQty}))
+				.append($('<td/>', {align:'center',class:'number',text:items.imagePrice*items.imageQty}))
+						.appendTo($('#imageboardListTable'));
+
+			});
+			$.each($('.number'),function(){
+				this.innerText = this.innerText.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				});
+			$('#imageboardPagingDiv').html(data.imageboardPaging);
+		},
+		error:function(err){
+			alert("겟이미지보드리스트");
+			console.log(err);
+		}
+	});
+});
 </script>

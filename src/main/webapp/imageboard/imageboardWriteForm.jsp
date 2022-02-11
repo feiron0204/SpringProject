@@ -37,10 +37,11 @@ action="/SpringProject/imageboard/imageboardWrite" >
 		</tr>
 		<tr>
 			<td colspan="2" >
-				<input type="file" name="image1" >
+				<input type="file" name="img" >
 			</td>
 		</tr>
 		<tr>
+		
 			<td colspan="2" align="center">
 				<input type="button" id="imageboardWriteBtn" value="이미지등록">
 				<input type="reset" value="다시작성">
@@ -52,7 +53,10 @@ action="/SpringProject/imageboard/imageboardWrite" >
 <script type="text/javascript">
 $('#imageboardWriteBtn').click(function(){
 	//1. 단순 submit
-	$('#imageboardWriteForm').submit();
+	console.log("ddd");
+	$('#imageboardWirteForm').submit();
+	alert("등록성공");
+	location.href="/SpringProject/imageboard/imageboardList";
 	//2. ajax
 });
 </script>
