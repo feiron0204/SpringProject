@@ -31,12 +31,59 @@ public class ImageboardController {
 		model.addAttribute("display", "/imageboard/imageboardWriteForm.jsp");
 		return "/index";
 	}
-	
+	/*
 	// name="img"
 	@PostMapping(value = "imageboardWrite")
 	@ResponseBody
 	public void imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
 								@RequestParam MultipartFile img,
+								HttpSession session) {//실제경로얻을라고
+		//지금 img는 임시폴더에있음
+//		가상폴더에올리고 실제폴더에는 복사해주기
+//		//이클립스때는 가상폴더에 접근불가였는데 얜함
+//		String filePath = "C:/Spring/workspace/SpringProject/src/main/webapp/storage";//가상폴더
+//		String fileName = img.getOriginalFilename();//너의..이름은?
+//		
+//		//파일복사
+//		File file = new File(filePath,fileName);//파일생성
+//		try {
+//			FileCopyUtils.copy(img.getInputStream(),new FileOutputStream(file));
+////		} catch (FileNotFoundException e) {
+////			e.printStackTrace();
+//		} catch (IOException e) {//얘가 부모라서 위쪽 애도 들어올수있음
+//			e.printStackTrace();
+//		}
+//		
+//		
+		//아직 DTO에 파일이름못들어감...
+		
+		//이번엔 실제폴더에 직접올려보기
+		String filePath = session.getServletContext().getRealPath("/storage");
+		String fileName = img.getOriginalFilename();
+		
+		File file = new File(filePath,fileName);
+		
+		try {
+			img.transferTo(file);
+//		} catch (IllegalStateException e) {
+//			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		imageboardDTO.setImage1(fileName);
+		
+		System.out.println(imageboardDTO);
+		//이제 DB가면됨
+		imageboardService.imageboardWrite(imageboardDTO);
+		
+	}
+	*/
+	// name="img" 2개 이상인 경우
+	@PostMapping(value = "imageboardWrite")
+	@ResponseBody
+	public void imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
+								@RequestParam MultipartFile[] img,
 								HttpSession session) {//실제경로얻을라고
 		//지금 img는 임시폴더에있음
 		/*가상폴더에올리고 실제폴더에는 복사해주기
@@ -59,26 +106,51 @@ public class ImageboardController {
 		
 		//이번엔 실제폴더에 직접올려보기
 		String filePath = session.getServletContext().getRealPath("/storage");
-		String fileName = img.getOriginalFilename();
+		//String fileName = img.getOriginalFilename();
+		String fileName;
 		
-		File file = new File(filePath,fileName);
-		
-		try {
-			img.transferTo(file);
-//		} catch (IllegalStateException e) {
-//			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		//File file = new File(filePath,fileName);
+		File file;
+		if(img[0]!=null) {
+			fileName=img[0].getOriginalFilename();
+			file = new File(filePath,fileName);
+			
+			try {
+				img[0].transferTo(file);
+	//		} catch (IllegalStateException e) {
+	//			e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			imageboardDTO.setImage1(fileName);
+		}else {
+			imageboardDTO.setImage1("");
 		}
 		
-		imageboardDTO.setImage1(fileName);
+		if(img[1]!=null) {
+			fileName=img[1].getOriginalFilename();
+			file = new File(filePath,fileName);
+			
+			try {
+				img[1].transferTo(file);
+	//		} catch (IllegalStateException e) {
+	//			e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			imageboardDTO.setImage2(fileName);
+		}else {
+			imageboardDTO.setImage2("");
+		}
 		
+		System.out.println(imageboardDTO);
 		//이제 DB가면됨
 		imageboardService.imageboardWrite(imageboardDTO);
 		
 	}
 	
-	// name="img" 2개 이상인 경우
 	
 	@GetMapping(value = "imageboardList")
 	public String imageboardList(Model model,@RequestParam(required = false,defaultValue = "1") String pg) {

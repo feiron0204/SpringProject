@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <h3>이미지 등록</h3>
-<form id="imageboardWirteForm" method="post" enctype="multipart/form-data" 
+<form id="imageboardWriteForm" method="post" enctype="multipart/form-data" 
 action="/SpringProject/imageboard/imageboardWrite" >
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>
@@ -41,6 +41,16 @@ action="/SpringProject/imageboard/imageboardWrite" >
 			</td>
 		</tr>
 		<tr>
+			<td colspan="2" >
+				<input type="file" name="img" >
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" >
+				<input type="file" name="img[]" multiple="multiple" ><!-- 파일을 한번에 여러개 선택 -->
+			</td>
+		</tr>
+		<tr>
 		
 			<td colspan="2" align="center">
 				<input type="button" id="imageboardWriteBtn" value="이미지등록">
@@ -54,9 +64,11 @@ action="/SpringProject/imageboard/imageboardWrite" >
 $('#imageboardWriteBtn').click(function(){
 	//1. 단순 submit
 	console.log("ddd");
-	$('#imageboardWirteForm').submit();
-	alert("등록성공");
-	location.href="/SpringProject/imageboard/imageboardList";
+	$('#imageboardWriteForm').submit();
+	//이러면 등록도하기전에 리스트로넘어가버림
+	//alert("등록성공");
+	//location.href="/SpringProject/imageboard/imageboardList";
+	
 	//2. ajax
 });
 </script>

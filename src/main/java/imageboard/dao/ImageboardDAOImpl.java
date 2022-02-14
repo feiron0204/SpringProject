@@ -19,6 +19,7 @@ public class ImageboardDAOImpl implements ImageboardDAO {
 	
 	@Override
 	public void imageboardWrite(ImageboardDTO imageboardDTO) {
+		System.out.println(imageboardDTO);
 		sqlSession.insert("imageboardSQL.imageboardWrite", imageboardDTO);
 	}
 

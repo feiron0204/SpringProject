@@ -13,7 +13,8 @@
  									, #{imageQty}
  									, #{imageContent}
  									, #{image1}
- 									, sysdate)
+ 									, sysdate
+ 									, #{image2})
  	</insert>
  	
  	<select id="getImageboardList" parameterType="java.util.Map" resultType="imageboard">
