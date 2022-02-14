@@ -107,8 +107,8 @@ $(function(){
 		success:function(data){
 			$.each(data.list,function(index,items){
 				$('<tr/>')
-				.append($('<td/>', {align:'center'})
-						.append($('<input>',{type:'checkbox',name:'check',class:'check',value:items.seq,text:items.seq})))
+				.append($('<td/>', {align:'center',text:items.seq})
+						.prepend($('<input>',{type:'checkbox',name:'check',class:'check',value:items.seq})))
 				.append($('<td/>', {align:'center'})
 						.append($('<img/>',{src:'/SpringProject/storage/'+items.image1,width:'70',height:'70',alt:items.imageName})))
 				.append($('<td/>', {align:'center'})

@@ -2,6 +2,7 @@ package imageboard.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -80,28 +81,29 @@ public class ImageboardController {
 	}
 	*/
 	// name="img" 2개 이상인 경우
+	/*
 	@PostMapping(value = "imageboardWrite")
 	@ResponseBody
 	public void imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
 								@RequestParam MultipartFile[] img,
 								HttpSession session) {//실제경로얻을라고
 		//지금 img는 임시폴더에있음
-		/*가상폴더에올리고 실제폴더에는 복사해주기
-		//이클립스때는 가상폴더에 접근불가였는데 얜함
-		String filePath = "C:/Spring/workspace/SpringProject/src/main/webapp/storage";//가상폴더
-		String fileName = img.getOriginalFilename();//너의..이름은?
-		
-		//파일복사
-		File file = new File(filePath,fileName);//파일생성
-		try {
-			FileCopyUtils.copy(img.getInputStream(),new FileOutputStream(file));
-//		} catch (FileNotFoundException e) {
+//		가상폴더에올리고 실제폴더에는 복사해주기
+//		//이클립스때는 가상폴더에 접근불가였는데 얜함
+//		String filePath = "C:/Spring/workspace/SpringProject/src/main/webapp/storage";//가상폴더
+//		String fileName = img.getOriginalFilename();//너의..이름은?
+//		
+//		//파일복사
+//		File file = new File(filePath,fileName);//파일생성
+//		try {
+//			FileCopyUtils.copy(img.getInputStream(),new FileOutputStream(file));
+////		} catch (FileNotFoundException e) {
+////			e.printStackTrace();
+//		} catch (IOException e) {//얘가 부모라서 위쪽 애도 들어올수있음
 //			e.printStackTrace();
-		} catch (IOException e) {//얘가 부모라서 위쪽 애도 들어올수있음
-			e.printStackTrace();
-		}
-		
-		*/
+//		}
+//		
+//		
 		//아직 DTO에 파일이름못들어감...
 		
 		//이번엔 실제폴더에 직접올려보기
@@ -150,7 +152,32 @@ public class ImageboardController {
 		imageboardService.imageboardWrite(imageboardDTO);
 		
 	}
-	
+	*/
+	//한번에 여러개의 파일올릴떄
+	@PostMapping(value = "imageboardWrite")
+	@ResponseBody
+	public void imageboardWrite(@ModelAttribute ImageboardDTO imageboardDTO,
+								@RequestParam("img[]") List<MultipartFile> list,
+								HttpSession session) {
+		String filePath = session.getServletContext().getRealPath("/storage");
+		String fileName;
+		File file;
+		
+		for(MultipartFile img:list) {
+			fileName=img.getOriginalFilename();
+			file = new File(filePath,fileName);
+			
+			try {
+				img.transferTo(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			imageboardDTO.setImage1(fileName);
+			imageboardDTO.setImage2("");
+			
+			imageboardService.imageboardWrite(imageboardDTO);
+		}
+	}
 	
 	@GetMapping(value = "imageboardList")
 	public String imageboardList(Model model,@RequestParam(required = false,defaultValue = "1") String pg) {
