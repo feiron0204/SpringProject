@@ -1,6 +1,7 @@
 package imageboard.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +23,37 @@ public class ImageboardServiceImpl implements ImageboardService{
 		imageboardDAO.imageboardWrite(imageboardDTO);
 	}
 
+
+//	@Override
+//	public Map<String, Object> getImageboardList(String pg) {
+//		Map<String,Object> map= new HashMap<String, Object>();
+//		
+//		Map<String,Integer> temp = new HashMap<String, Integer>();
+//		temp.put("endNum", Integer.parseInt(pg)*3);
+//		temp.put("startNum", temp.get("endNum")-2);
+//		
+//		map.put("list", imageboardDAO.getImageboardList(temp));
+//		
+//		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
+//		imageboardPaging.setPageBlock(3);
+//		imageboardPaging.setPageSize(3);
+//		imageboardPaging.setTotalA(imageboardDAO.getTotalA());
+//		
+//		imageboardPaging.makePagingHTML();
+//		
+//		
+//		map.put("imageboardPaging", imageboardPaging.getPagingHTML().toString());
+//		return map;
+//	}
 	@Override
-	public Map<String, Object> getImageboardList(String pg) {
-		Map<String,Object> map= new HashMap<String, Object>();
+	public List<ImageboardDTO> getImageboardList(String pg) {
+		int endNum = Integer.parseInt(pg)*3;
+		int startNum = endNum-2;
 		
-		Map<String,Integer> temp = new HashMap<String, Integer>();
-		temp.put("endNum", Integer.parseInt(pg)*3);
-		temp.put("startNum", temp.get("endNum")-2);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 		
-		map.put("list", imageboardDAO.getImageboardList(temp));
-		
-		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
-		imageboardPaging.setPageBlock(3);
-		imageboardPaging.setPageSize(3);
-		imageboardPaging.setTotalA(imageboardDAO.getTotalA());
-		
-		imageboardPaging.makePagingHTML();
-		
-		
-		map.put("imageboardPaging", imageboardPaging.getPagingHTML().toString());
-		return map;
+		return imageboardDAO.getImageboardList(map);
 	}
 }

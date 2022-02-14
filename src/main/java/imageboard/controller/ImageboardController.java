@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import imageboard.bean.ImageboardDTO;
 import imageboard.service.ImageboardService;
@@ -186,11 +187,24 @@ public class ImageboardController {
 		return "/index";
 	}
 	
-	
+//	
+//	@PostMapping(value = "getImageboardList")
+//	@ResponseBody
+//	public Map<String,Object> getImageboardList(@RequestParam String pg){
+//		return imageboardService.getImageboardList(pg);
+//	}
+//	
 	@PostMapping(value = "getImageboardList")
 	@ResponseBody
-	public Map<String,Object> getImageboardList(@RequestParam String pg){
-		return imageboardService.getImageboardList(pg);
+	public ModelAndView getImageboardList(@RequestParam String pg){
+		//db
+		List<ImageboardDTO> list = imageboardService.getImageboardList(pg);
+		//페이징
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
 	}
 	
 }

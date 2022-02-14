@@ -73,7 +73,7 @@ margin-top: 10px;
 		<fmt:formatNumber pattern=""></fmt:formatNumber>
 	</tr>
 </table>
-<input type="submit" value="선택삭제" style="float: left; margin: 5px 10px">
+<input id="imageboardDeleteBtn" type="button" value="선택삭제" style="float: left; margin: 5px 10px">
 <div id="imageboardPagingDiv" style="text-align:center; width: 750; font-size: 15pt" ></div>
 </form>
 
@@ -110,18 +110,19 @@ $(function(){
 				.append($('<td/>', {align:'center',text:items.seq})
 						.prepend($('<input>',{type:'checkbox',name:'check',class:'check',value:items.seq})))
 				.append($('<td/>', {align:'center'})
-						.append($('<img/>',{src:'/SpringProject/storage/'+items.image1,width:'70',height:'70',alt:items.imageName})))
+						.append($('<img/>',{src:'/SpringProject/storage/'+items.image1,style:'width:70px;height:70px;cursor:pointer',alt:items.imageName})))
 				.append($('<td/>', {align:'center'})
 						.append($('<a/>',{href:'/SpringProject/imageboard/imageboardView?pg='+$('#pg').val()+'&seq='+items.seq,class:'imageNameA',text:items.imageName})))
-				.append($('<td/>', {align:'center',class:'number',text:items.imagePrice}))
-				.append($('<td/>', {align:'center',class:'number',text:items.imageQty}))
-				.append($('<td/>', {align:'center',class:'number',text:items.imagePrice*items.imageQty}))
+				.append($('<td/>', {align:'center',class:'number',text:items.imagePrice.toLocaleString()}))
+				.append($('<td/>', {align:'center',class:'number',text:items.imageQtyto.LocaleString()}))
+				.append($('<td/>', {align:'center',class:'number',text:(items.imagePrice*items.imageQty).toLocaleString()}))
 						.appendTo($('#imageboardListTable'));
 
 			});
-			$.each($('.number'),function(){
-				this.innerText = this.innerText.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				});
+			//$.each($('.number'),function(){
+			//	this.innerText = this.innerText.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			//});
+			
 			$('#imageboardPagingDiv').html(data.imageboardPaging);
 		},
 		error:function(err){
