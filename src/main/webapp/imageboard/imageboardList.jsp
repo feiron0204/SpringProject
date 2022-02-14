@@ -64,7 +64,7 @@ margin-top: 10px;
 <table border="1" cellspacing="0" cellpadding="5" id="imageboardListTable" frame="hsides" rules="rows">
 	<tr>
 		<th width="100">
-		<input type="checkbox" id="all" onclick="checkAll()">글번호</th>
+		<input type="checkbox" id="all" >글번호</th>
 		<th width="100">이미지</th>
 		<th width="150">상품명</th>
 		<th width="150">단가</th>
@@ -83,6 +83,7 @@ margin-top: 10px;
 function imageboardPaging(pg2){
 	location.href="/SpringProject/imageboard/imageboardList?pg="+pg2;
 }
+/*
 function checkAll(){
 	//alert("체크박스의 개수 = "+document.getElementsByName("check").length);
 	//alert("글번호 체크 여부 = "+document.getElementById("all").checked);
@@ -98,6 +99,7 @@ function checkAll(){
 		}
 	}
 }
+*/
 $(function(){
 	$.ajax({
 		type:'post',
@@ -114,7 +116,7 @@ $(function(){
 				.append($('<td/>', {align:'center'})
 						.append($('<a/>',{href:'/SpringProject/imageboard/imageboardView?pg='+$('#pg').val()+'&seq='+items.seq,class:'imageNameA',text:items.imageName})))
 				.append($('<td/>', {align:'center',class:'number',text:items.imagePrice.toLocaleString()}))
-				.append($('<td/>', {align:'center',class:'number',text:items.imageQtyto.LocaleString()}))
+				.append($('<td/>', {align:'center',class:'number',text:items.imageQty.toLocaleString()}))
 				.append($('<td/>', {align:'center',class:'number',text:(items.imagePrice*items.imageQty).toLocaleString()}))
 						.appendTo($('#imageboardListTable'));
 
@@ -131,4 +133,27 @@ $(function(){
 		}
 	});
 });
+//전체선택전체해제
+$('#all').click(function(){
+	//alert($('#all').attr('checked'));//이러면 정의되지않음! 이라고뜸...미리 checked라고 attribute를 준다고해도 계속 checked만 나옴
+	//alert($('#all').prop('checked'));//이래야 ture, false뜸
+	if($('#all').prop('checked')){
+		$('input[name=check]').prop('checked',true);
+	}else{
+		$('input[name=check]').prop('checked',false);
+	}
+});
+
 </script>
+
+<%-- 
+attr()
+ - HTML에 작성된 속성값을 문자열로 가져온다
+ 
+prop()
+ - 자바스크립트의 프로퍼티를 가져온다
+ - 자바스크립트의 프로퍼티 값이 넘어오므로 boolean, date, function등을 가져올 수 있다.
+[형식]
+prop(key) -> key에 해당하는 속성값을 가져온다
+prop(key, value) -> key에 해당하는 속성값을 추가한다
+ --%>
