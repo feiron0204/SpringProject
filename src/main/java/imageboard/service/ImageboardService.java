@@ -16,4 +16,6 @@ public interface ImageboardService {
 	public ImageboardDTO getImageboardView(String seq);
 
 	public ImageboardPaging imageboardPaging(String pg);
+
+	public void imageboardDelete(String seq);
 }

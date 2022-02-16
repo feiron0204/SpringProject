@@ -38,4 +38,9 @@ public class ImageboardDAOImpl implements ImageboardDAO {
 		return sqlSession.selectOne("imageboardSQL.getImageboardView", Integer.parseInt(seq));
 	}
 
+	@Override
+	public void imageboardDelete(String seq) {
+		sqlSession.delete("imageboardSQL.imageboardDelete",Integer.parseInt(seq));
+	}
+
 }

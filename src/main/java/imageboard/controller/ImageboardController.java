@@ -224,4 +224,12 @@ public class ImageboardController {
 		ImageboardDTO imageboardDTO = imageboardService.getImageboardView(seq);
 		return imageboardDTO;
 	}
+	
+	@PostMapping(value = "imageboardDelete")
+	@ResponseBody
+	public void imageboardDelete(@RequestParam String[] check) {
+		for(String seq:check) {
+			imageboardService.imageboardDelete(seq);
+		}
+	}
 }

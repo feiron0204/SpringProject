@@ -59,7 +59,7 @@ margin-top: 10px;
 }
 </style>   
 
-<form name="" method="post" action="/SpringProject/imageboard/imageboardDelete">
+<form name="" id="imageboardListForm" method="post" action="/SpringProject/imageboard/imageboardDelete">
 <input type="hidden" name="pg" id="pg" value="${pg}">    
 <table border="1" cellspacing="0" cellpadding="5" id="imageboardListTable" frame="hsides" rules="rows">
 	<tr>
@@ -158,6 +158,20 @@ $('#all').click(function(){
 	}
 });
 
+$('#imageboardDeleteBtn').click(function(){
+	$.ajax({
+		type:'post',
+		data:$('#imageboardListForm').serialize(),
+		url:'/SpringProject/imageboard/imageboardDelete',
+		success:function(){
+			alert('삭제완료');
+			location.href="/SpringProject/imageboard/imageboardList";
+		},
+		error:function(err){
+			console.log(err);
+		}
+	});//ajax
+});
 </script>
 
 <%-- 

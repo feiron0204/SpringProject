@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <h3>이미지 등록</h3>
-<form id="imageboardWriteForm" method="post" enctype="multipart/form-data" 
-action="/SpringProject/imageboard/imageboardWrite" >
+<!-- <form id="imageboardWriteForm" method="post" enctype="multipart/form-data" 
+action="/SpringProject/imageboard/imageboardWrite" > -->
+<form id="imageboardWriteForm">
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>
 			<td width="100" align="center">상품코드</td>
@@ -64,11 +65,38 @@ action="/SpringProject/imageboard/imageboardWrite" >
 $('#imageboardWriteBtn').click(function(){
 	//1. 단순 submit
 	console.log("ddd");
-	$('#imageboardWriteForm').submit();
+	//$('#imageboardWriteForm').submit();
 	//이러면 등록도하기전에 리스트로넘어가버림
 	//alert("등록성공");
 	//location.href="/SpringProject/imageboard/imageboardList";
 	
 	//2. ajax
+	var formData = new FormData($('#imageboardWriteForm')[0]);//<-form의 모든것
+	$.ajax({
+		type: 'post',
+		url: '/SpringProject/imageboard/imageboardWrite',
+		enctype: 'multipart/form-data',
+		processData: false,
+		contentType: false,
+		data: formData,
+		success: function(){
+			alert('이미지등록완료');
+			location.href="/SpringProject/imageboard/imageboardList";
+		},
+		error:function(err){
+			console.log(err);
+		}
+	});
 });
 </script>
+
+<!-- 
+processData
+-기본값은 true
+-기본적으로 Query String 으로 변환해서 보내진다('변수=값&변수=값')
+-파일 전송시에는 반드시 false로 해야한다 (formdata를 문자열로변환하지않음)
+
+contentType
+  - 기본적으로 "application/x-www-form-urlencoded; charset=UTF-8"
+  - 파일 전송시에는 'multipart/form-data'로 전송이 될 수 있도록 false로 설정한다
+ -->

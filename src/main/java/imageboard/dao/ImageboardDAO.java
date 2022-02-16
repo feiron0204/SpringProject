@@ -15,4 +15,6 @@ public interface ImageboardDAO {
 
 	public ImageboardDTO getImageboardView(String seq);
 
+	public void imageboardDelete(String seq);
+
 }

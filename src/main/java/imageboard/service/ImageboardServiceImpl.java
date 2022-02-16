@@ -75,4 +75,10 @@ public class ImageboardServiceImpl implements ImageboardService{
 		
 		return imageboardPaging;
 	}
+
+
+	@Override
+	public void imageboardDelete(String seq) {
+		imageboardDAO.imageboardDelete(seq);
+	}
 }
