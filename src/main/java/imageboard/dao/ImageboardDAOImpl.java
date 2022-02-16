@@ -33,4 +33,9 @@ public class ImageboardDAOImpl implements ImageboardDAO {
 		return sqlSession.selectOne("imageboardSQL.getTotalA");
 	}
 
+	@Override
+	public ImageboardDTO getImageboardView(String seq) {
+		return sqlSession.selectOne("imageboardSQL.getImageboardView", Integer.parseInt(seq));
+	}
+
 }

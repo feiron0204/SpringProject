@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import imageboard.bean.ImageboardDTO;
+import imageboard.bean.ImageboardPaging;
 import imageboard.service.ImageboardService;
 
 @Controller
@@ -200,11 +201,27 @@ public class ImageboardController {
 		//db
 		List<ImageboardDTO> list = imageboardService.getImageboardList(pg);
 		//페이징
+		ImageboardPaging imageboardPaging = imageboardService.imageboardPaging(pg);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("imageboardPaging", imageboardPaging);
 		mav.setViewName("jsonView");
 		return mav;
 	}
 	
+	@GetMapping(value = "imageboardView")
+	public String imageboardView(@RequestParam String seq, @RequestParam String pg,Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("seq", seq);
+		model.addAttribute("display", "/imageboard/imageboardView.jsp");
+		return "/index";
+	}
+	
+	@PostMapping(value = "getImageboardView")
+	@ResponseBody
+	public ImageboardDTO getImageboardView(@RequestParam String seq) {
+		ImageboardDTO imageboardDTO = imageboardService.getImageboardView(seq);
+		return imageboardDTO;
+	}
 }

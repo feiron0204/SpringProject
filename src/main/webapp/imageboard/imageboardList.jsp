@@ -112,20 +112,34 @@ $(function(){
 				.append($('<td/>', {align:'center',text:items.seq})
 						.prepend($('<input>',{type:'checkbox',name:'check',class:'check',value:items.seq})))
 				.append($('<td/>', {align:'center'})
-						.append($('<img/>',{src:'/SpringProject/storage/'+items.image1,style:'width:70px;height:70px;cursor:pointer',alt:items.imageName})))
+						.append($('<img/>',{src:'/SpringProject/storage/'+items.image1,
+							//class:'img_'+items.seq,
+							class:'img',
+							style:'width:70px;height:70px;cursor:pointer',alt:items.imageName})))
 				.append($('<td/>', {align:'center'})
 						.append($('<a/>',{href:'/SpringProject/imageboard/imageboardView?pg='+$('#pg').val()+'&seq='+items.seq,class:'imageNameA',text:items.imageName})))
 				.append($('<td/>', {align:'center',class:'number',text:items.imagePrice.toLocaleString()}))
 				.append($('<td/>', {align:'center',class:'number',text:items.imageQty.toLocaleString()}))
 				.append($('<td/>', {align:'center',class:'number',text:(items.imagePrice*items.imageQty).toLocaleString()}))
 						.appendTo($('#imageboardListTable'));
+				
+		/* 	$('.img_'+items.seq).click(function(){
+				console.log($(this));
+				location.href = '/SpringProject/imageboard/imageboardView?seq='+items.seq+'&pg='+$('#pg').val();
+				}); */
 
 			});
 			//$.each($('.number'),function(){
 			//	this.innerText = this.innerText.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			//});
 			
-			$('#imageboardPagingDiv').html(data.imageboardPaging);
+			$('.img').click(function(){
+				//console.log($(this).parent().prev().text());
+				
+				var seq=$(this).parent().prev().text();
+				location.href = '/SpringProject/imageboard/imageboardView?seq='+seq+'&pg='+$('#pg').val();
+			});
+			$('#imageboardPagingDiv').html(data.imageboardPaging.pagingHTML);
 		},
 		error:function(err){
 			alert("겟이미지보드리스트");

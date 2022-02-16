@@ -41,7 +41,7 @@
  	<delete id="delete" parameterType="int">
  		delete from imageboard where seq=${seq}
  	</delete>
- 	<select id="imageboardView" parameterType="int" resultType="imageboard">
+ 	<select id="getImageboardView" parameterType="int" resultType="imageboard">
  		select * from imageboard where seq=#{seq}
  	</select>
  </mapper>

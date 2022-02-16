@@ -13,4 +13,6 @@ public interface ImageboardDAO {
 
 	public int getTotalA();
 
+	public ImageboardDTO getImageboardView(String seq);
+
 }

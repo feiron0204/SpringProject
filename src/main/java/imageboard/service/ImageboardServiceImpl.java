@@ -56,4 +56,23 @@ public class ImageboardServiceImpl implements ImageboardService{
 		
 		return imageboardDAO.getImageboardList(map);
 	}
+
+
+	@Override
+	public ImageboardDTO getImageboardView(String seq) {
+		return imageboardDAO.getImageboardView(seq);
+	}
+	
+	@Override
+	public ImageboardPaging imageboardPaging(String pg) {
+		int totalA = imageboardDAO.getTotalA();
+		
+		imageboardPaging.setCurrentPage(Integer.parseInt(pg));
+		imageboardPaging.setPageBlock(3);
+		imageboardPaging.setPageSize(3);
+		imageboardPaging.setTotalA(totalA);
+		imageboardPaging.makePagingHTML();
+		
+		return imageboardPaging;
+	}
 }
