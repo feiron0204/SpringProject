@@ -42,5 +42,10 @@ public class ImageboardDAOImpl implements ImageboardDAO {
 	public void imageboardDelete(String seq) {
 		sqlSession.delete("imageboardSQL.imageboardDelete",Integer.parseInt(seq));
 	}
+	
+	@Override
+	public void imageboardDelete2(Map<String, String[]> map) {
+		sqlSession.delete("imageboardSQL.imageboardDelete2",map);
+	}
 
 }

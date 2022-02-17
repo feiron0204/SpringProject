@@ -81,4 +81,11 @@ public class ImageboardServiceImpl implements ImageboardService{
 	public void imageboardDelete(String seq) {
 		imageboardDAO.imageboardDelete(seq);
 	}
+	
+	@Override
+	public void imageboardDelete2(String[] seq) {
+		Map<String, String[]> map = new HashMap<String, String[]>();
+		map.put("seqArr", seq);
+		imageboardDAO.imageboardDelete2(map);
+	}
 }

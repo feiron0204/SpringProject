@@ -228,8 +228,9 @@ public class ImageboardController {
 	@PostMapping(value = "imageboardDelete")
 	@ResponseBody
 	public void imageboardDelete(@RequestParam String[] check) {
-		for(String seq:check) {
-			imageboardService.imageboardDelete(seq);
-		}
+//		for(String seq:check) {
+//			imageboardService.imageboardDelete(seq);
+//		} 여러번수행
+		imageboardService.imageboardDelete2(check);
 	}
 }

@@ -159,18 +159,28 @@ $('#all').click(function(){
 });
 
 $('#imageboardDeleteBtn').click(function(){
-	$.ajax({
-		type:'post',
-		data:$('#imageboardListForm').serialize(),
-		url:'/SpringProject/imageboard/imageboardDelete',
-		success:function(){
-			alert('삭제완료');
-			location.href="/SpringProject/imageboard/imageboardList";
-		},
-		error:function(err){
-			console.log(err);
-		}
-	});//ajax
+	alert($('input[name=check]:checked').length);//check된 개수를 구하기
+	
+	if(count==0){
+		alert('삭제할 항목을 선택하세요');
+	}else{
+		if(confirm('정말로 삭제??')){
+			$.ajax({
+				type:'post',
+				data:$('#imageboardListForm').serialize(),
+				url:'/SpringProject/imageboard/imageboardDelete',
+				success:function(){
+					alert('삭제완료');
+					location.href="/SpringProject/imageboard/imageboardList";
+				},
+				error:function(err){
+					console.log(err);
+				}
+			});//ajax
+	}
+		
+	}
+	
 });
 </script>
 

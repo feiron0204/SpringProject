@@ -18,4 +18,6 @@ public interface ImageboardService {
 	public ImageboardPaging imageboardPaging(String pg);
 
 	public void imageboardDelete(String seq);
+
+	public void imageboardDelete2(String[] seq);
 }

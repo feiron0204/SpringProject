@@ -17,4 +17,6 @@ public interface ImageboardDAO {
 
 	public void imageboardDelete(String seq);
 
+	public void imageboardDelete2(Map<String, String[]> map);
+
 }
